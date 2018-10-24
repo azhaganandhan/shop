@@ -1,0 +1,5 @@
+<%= form.fields_for :line_items do |form| %>
+<div class="form-group">
+  <%= render "line_item_form", form: form, line_item: form.object %>
+</div>
+<% end %>
