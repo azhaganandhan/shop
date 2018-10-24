@@ -1,0 +1,39 @@
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="row">
+    <fieldset class="col-md-12">
+      <%= form.fields_for :line_items do |image_form| %>
+      <div class="form-group">
+        <%= render "line_item_form", form: image_form, f: image_form.object %>
+      </div>
+      <% end %>
+      <div class="row">
+        <div class="col-md-5">
+          <%= link_to_add_fields "Add Image", form, :line_items%>
+        </div>
+        <div class="col-md-4">
+          <p class="help-block">Size: 2400x1600 px @ 72 dpi</p>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
